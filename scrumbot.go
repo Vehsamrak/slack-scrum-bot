@@ -5,7 +5,6 @@ import (
     "os"
 
     "github.com/nlopes/slack"
-    "time"
 )
 
 const SLACK_TOKEN_ENVIRONMENT = "IQOPTION_SLACK_TOKEN_SCRUM_BOT"
@@ -30,26 +29,20 @@ func main() {
 
     fmt.Println("")
 
-    ticker := time.NewTicker(1 * time.Second)
+    channelId, timestamp, err := api.PostMessage(
+        CHANNEL_BOTTESTING, getMeetingInvitation(),
+        slack.PostMessageParameters{
+            Username: BOT_NAME,
+            AsUser:   true,
+        },
+    )
 
-    for t := range ticker.C {
-        fmt.Println("Tick at", t)
-
-        channelId, timestamp, err := api.PostMessage(
-            CHANNEL_BOTTESTING, getMeetingInvitation(),
-            slack.PostMessageParameters{
-                Username: BOT_NAME,
-                AsUser:   true,
-            },
-        )
-
-        if err != nil {
-            fmt.Printf("%s\n", err)
-            return
-        }
-
-        fmt.Printf("Message successfully sent to channel %s at %s\n", channelId, timestamp)
+    if err != nil {
+        fmt.Printf("%s\n", err)
+        return
     }
+
+    fmt.Printf("Message successfully sent to channel %s at %s\n", channelId, timestamp)
 }
 
 func getMeetingInvitation() string {
