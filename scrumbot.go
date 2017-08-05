@@ -46,5 +46,5 @@ func main() {
 }
 
 func getMeetingInvitation() string {
-    return "Ребята, пойдем соберёмся! (с)"
+    return "Ребята, пойдём соберёмся! ©"
 }
