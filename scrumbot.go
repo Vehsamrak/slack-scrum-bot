@@ -30,7 +30,7 @@ func main() {
     fmt.Println("")
 
     channelId, timestamp, err := api.PostMessage(
-        CHANNEL_BOTTESTING, getMeetingInvitation(),
+        CHANNEL_AFFILIATE_DEV, getMeetingInvitation(),
         slack.PostMessageParameters{
             Username: BOT_NAME,
             AsUser:   true,
