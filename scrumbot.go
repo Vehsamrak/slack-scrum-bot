@@ -52,7 +52,8 @@ func getMeetingInvitation() string {
 
     answers := []string{
         "Ребята, пойдём соберёмся! ©",
-        "Кто со мной на стэндап митинг?",
+        "Кто со мной на митинг?",
+        "Право на митинг есть в конституции!",
         "Митинг, Uj!",
         "It's meeting time!",
         "Время митинга!",
@@ -66,5 +67,5 @@ func getMeetingInvitation() string {
         "Поезд хайпа направляется в сторону переговорки!",
     }
 
-    return answers[rand.Intn(len(answers))]
+    return answers[rand.Intn(len(answers))] + " <!channel>"
 }
