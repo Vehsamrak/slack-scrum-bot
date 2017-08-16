@@ -53,6 +53,7 @@ func getMeetingInvitation() string {
     answers := []string{
         "Ребята, пойдём соберёмся! ©",
         "Кто со мной на стэндап митинг?",
+        "Митинг, Uj!",
         "It's meeting time!",
         "Время митинга!",
         "Свистать всех на митинг!",
