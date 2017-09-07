@@ -5,7 +5,7 @@ import (
     "os"
     "time"
     "math/rand"
-
+    "flag"
     "github.com/nlopes/slack"
 )
 
@@ -13,6 +13,7 @@ const SLACK_TOKEN_ENVIRONMENT = "IQOPTION_SLACK_TOKEN_SCRUM_BOT"
 const BOT_NAME = "scrum"
 const CHANNEL_BOTTESTING = "G6J5NPD4Z"
 const CHANNEL_AFFILIATE_DEV = "C0FTH89AT"
+const CHANNEL_AFFILIATE_Y = "C6Z06UPQA"
 
 func main() {
     api := slack.New(os.Getenv(SLACK_TOKEN_ENVIRONMENT))
@@ -31,8 +32,18 @@ func main() {
 
     fmt.Println("")
 
+    slackChannel := flag.String("channel", CHANNEL_BOTTESTING, "Slack channel to send message")
+    flag.Parse()
+
+    switch *slackChannel {
+    case "y":
+        *slackChannel = CHANNEL_AFFILIATE_Y
+    case "x":
+        *slackChannel = CHANNEL_AFFILIATE_DEV
+    }
+
     channelId, timestamp, err := api.PostMessage(
-        CHANNEL_AFFILIATE_DEV, getMeetingInvitation(),
+        *slackChannel, getMeetingInvitation(),
         slack.PostMessageParameters{
             Username: BOT_NAME,
             AsUser:   true,
